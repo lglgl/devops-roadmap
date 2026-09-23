@@ -1,0 +1,427 @@
+# ============================================================
+# Jenkins on Docker Desktop Kubernetes
+#
+# 环境：
+#   MacBook Pro M4
+#   Docker Desktop
+#   Kubernetes kubeadm
+#   Kubernetes v1.32.2
+#   单节点 docker-desktop
+#
+# 功能：
+#   1. Jenkins Namespace
+#   2. Jenkins ServiceAccount
+#   3. Jenkins RBAC
+#   4. Jenkins PVC
+#   5. Jenkins Deployment
+#   6. Jenkins Service
+#
+# 访问：
+#   kubectl port-forward -n jenkins svc/jenkins 8080:8080
+#
+# 浏览器：
+#   http://localhost:8080
+# ============================================================
+
+
+# ============================================================
+# 1. Namespace
+# ============================================================
+
+apiVersion: v1
+kind: Namespace
+
+metadata:
+  name: jenkins
+
+
+---
+# ============================================================
+# 2. ServiceAccount
+#
+# Jenkins 后续需要通过 Kubernetes API：
+#   - 创建 Agent Pod
+#   - 查看 Pod
+#   - 删除 Pod
+#   - 查看日志
+#   - 执行 Pod 命令
+#
+# 因此提前创建 ServiceAccount。
+# ============================================================
+
+apiVersion: v1
+kind: ServiceAccount
+
+metadata:
+  name: jenkins
+  namespace: jenkins
+
+
+---
+# ============================================================
+# 3. Role
+#
+# 当前只授权 Jenkins 在 jenkins Namespace 内操作。
+#
+# 后续如果 Jenkins 需要部署到 default / dev / prod，
+# 再单独增加 Role / ClusterRole。
+# ============================================================
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+
+metadata:
+  name: jenkins
+  namespace: jenkins
+
+rules:
+
+  # ----------------------------------------------------------
+  # Kubernetes 核心资源
+  # ----------------------------------------------------------
+
+  - apiGroups: [""]
+    resources:
+      - pods
+      - pods/exec
+      - pods/log
+      - secrets
+      - configmaps
+      - services
+
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - delete
+      - update
+      - patch
+
+
+  # ----------------------------------------------------------
+  # Deployment / ReplicaSet / StatefulSet
+  # ----------------------------------------------------------
+
+  - apiGroups:
+      - apps
+
+    resources:
+      - deployments
+      - replicasets
+      - statefulsets
+
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - delete
+      - update
+      - patch
+
+
+---
+# ============================================================
+# 4. RoleBinding
+#
+# 把上面的 Role 授权给 Jenkins ServiceAccount。
+# ============================================================
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+
+metadata:
+  name: jenkins
+  namespace: jenkins
+
+subjects:
+
+  - kind: ServiceAccount
+    name: jenkins
+    namespace: jenkins
+
+roleRef:
+
+  kind: Role
+  name: jenkins
+  apiGroup: rbac.authorization.k8s.io
+
+
+---
+# ============================================================
+# 5. PersistentVolumeClaim
+#
+# Docker Desktop Kubernetes 使用本地 hostpath StorageClass。
+#
+# 不再使用之前的：
+#
+#   storageClassName: standard
+#
+# 因为那个是你之前 redis-lab / k3s 环境的配置。
+#
+# Docker Desktop Kubernetes 使用：
+#
+#   hostpath
+#
+# ============================================================
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+metadata:
+  name: jenkins-home
+  namespace: jenkins
+
+spec:
+
+  accessModes:
+    - ReadWriteOnce
+
+  resources:
+    requests:
+      storage: 20Gi
+
+  # Docker Desktop Kubernetes 默认本地存储
+  storageClassName: hostpath
+
+
+---
+# ============================================================
+# 6. Jenkins Deployment
+# ============================================================
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: jenkins
+  namespace: jenkins
+
+spec:
+
+  # Jenkins Controller 只运行一个实例。
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: jenkins
+
+  # ----------------------------------------------------------
+  # Jenkins 使用 PVC。
+  #
+  # 单节点本地环境下，使用 Recreate 更简单。
+  #
+  # 避免旧 Pod 和新 Pod 同时挂载同一个 RWO PVC。
+  # ----------------------------------------------------------
+
+  strategy:
+    type: Recreate
+
+  template:
+
+    metadata:
+      labels:
+        app: jenkins
+
+    spec:
+
+      # Jenkins 使用自己的 ServiceAccount
+      serviceAccountName: jenkins
+
+      # Jenkins 官方镜像默认使用 UID 1000
+      securityContext:
+        fsGroup: 1000
+
+      containers:
+
+        - name: jenkins
+
+          # ==================================================
+          # Jenkins 镜像
+          #
+          # 使用国内 Docker Hub Mirror。
+          #
+          # 原始：
+          # jenkins/jenkins:lts-jdk21
+          #
+          # 国内：
+          # docker.m.daocloud.io/jenkins/jenkins:lts-jdk21
+          # ==================================================
+
+          image: docker.m.daocloud.io/jenkins/jenkins:lts-jdk21
+
+          imagePullPolicy: IfNotPresent
+
+          ports:
+
+            # Jenkins Web UI
+            - name: http
+              containerPort: 8080
+
+            # Jenkins inbound agent
+            - name: agent
+              containerPort: 50000
+
+          # ==================================================
+          # 资源限制
+          #
+          # MacBook 24GB RAM：
+          #
+          # Request:
+          #   CPU    0.5 Core
+          #   Memory 1GB
+          #
+          # Limit:
+          #   CPU    2 Core
+          #   Memory 3GB
+          #
+          # Jenkins Controller 本身不应该吃太多资源。
+          # ==================================================
+
+          resources:
+
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+
+            limits:
+              cpu: "2"
+              memory: "3Gi"
+
+          # ==================================================
+          # Jenkins JVM
+          # ==================================================
+
+          env:
+
+            - name: JAVA_OPTS
+
+              value: >-
+                -Xms512m
+                -Xmx2g
+
+          # ==================================================
+          # Jenkins 数据目录
+          #
+          # 所有：
+          #   用户
+          #   密码
+          #   Plugin
+          #   Job
+          #   Pipeline
+          #   Credentials
+          #   Jenkins Configuration
+          #
+          # 都保存这里。
+          # ==================================================
+
+          volumeMounts:
+
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+
+          # ==================================================
+          # Readiness Probe
+          #
+          # Jenkins 启动可能需要几十秒甚至几分钟。
+          # 所以给它 60 秒初始化时间。
+          # ==================================================
+
+          readinessProbe:
+
+            httpGet:
+              path: /login
+              port: 8080
+
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 12
+
+          # ==================================================
+          # Liveness Probe
+          #
+          # Jenkins 长时间无响应时，Kubernetes 自动重启。
+          # ==================================================
+
+          livenessProbe:
+
+            httpGet:
+              path: /login
+              port: 8080
+
+            initialDelaySeconds: 120
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 5
+
+      # ======================================================
+      # Jenkins Persistent Volume
+      # ======================================================
+
+      volumes:
+
+        - name: jenkins-home
+
+          persistentVolumeClaim:
+            claimName: jenkins-home
+
+
+---
+# ============================================================
+# 7. Jenkins Service
+#
+# 使用 ClusterIP + port-forward。
+#
+# 不再依赖 NodePort。
+#
+# 原因：
+#   你现在是 MacBook 本地实验环境。
+#
+# 使用：
+#
+#   kubectl port-forward
+#
+# 更简单，也避免 NodePort / Docker Desktop 网络映射问题。
+# ============================================================
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: jenkins
+  namespace: jenkins
+
+spec:
+
+  type: ClusterIP
+
+  selector:
+    app: jenkins
+
+  ports:
+
+    # --------------------------------------------------------
+    # Jenkins Web
+    # --------------------------------------------------------
+
+    - name: http
+
+      protocol: TCP
+
+      port: 8080
+
+      targetPort: 8080
+
+    # --------------------------------------------------------
+    # Jenkins Agent
+    # --------------------------------------------------------
+
+    - name: agent
+
+      protocol: TCP
+
+      port: 50000
+
+      targetPort: 50000
