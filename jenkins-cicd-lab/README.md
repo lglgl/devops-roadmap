@@ -1,7 +1,5 @@
 # Jenkins CI/CD Lab
 
-Production-style Jenkins pipeline.
-
 ## Pipeline
 
 GitHub
@@ -18,15 +16,14 @@ GitHub
 → Health Check
 → Rollback
 
-## Key Engineering Topics
+## 核心技术
 
 - Jenkins Pipeline
 - Jenkinsfile
-- Credentials management
-- GitHub integration
+- GitHub Webhook
 - Docker
 - Kubernetes
-- Security gates
-- Deployment strategies
+- Credentials
+- Security Gate
 - Rollback
 

@@ -1,8 +1,6 @@
 # DevOps Lab
 
-End-to-end production-style DevOps environment.
-
-## Architecture
+## 核心流程
 
 GitHub
 → Jenkins
@@ -11,37 +9,30 @@ GitHub
 → Docker Build
 → Registry
 → Kubernetes
-→ Prometheus / Grafana
+→ Prometheus
+→ Grafana
 
-## Core Technologies
+## 技术栈
 
-- GitHub
+- Linux
+- Git
 - Jenkins
 - Docker
 - Ansible
 - Kubernetes
 - Prometheus
 - Grafana
-- Linux
 - Python
 - Shell
 
-## Engineering Goals
+## 工程能力
 
-- Automated build
-- Automated testing
-- Automated deployment
+- CI/CD
+- 自动化部署
+- Docker 镜像构建
+- Kubernetes 部署
+- Health Check
 - Rollback
-- Health checks
-- Infrastructure automation
-- Observability
-- Security controls
-
-## Documentation
-
-- architecture/
-- docs/deployment.md
-- docs/troubleshooting.md
-- docs/disaster-recovery.md
-- docs/lessons-learned.md
+- Monitoring
+- Troubleshooting
 

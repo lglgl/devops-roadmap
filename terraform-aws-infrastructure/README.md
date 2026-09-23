@@ -1,7 +1,5 @@
 # Terraform AWS Infrastructure
 
-Infrastructure as Code for AWS.
-
 ## Architecture
 
 Terraform
@@ -14,25 +12,15 @@ Terraform
 → Database
 → Monitoring
 
-## Key Capabilities
+## 核心能力
 
-- Terraform modules
-- Environment separation
-- Remote state
-- VPC design
+- Terraform Module
+- Environment
+- Remote State
+- VPC
 - IAM
-- Security Groups
+- Security Group
 - CloudWatch
-- Cost awareness
-- Disaster recovery
-
-## Repository Structure
-
-- environments/
-- modules/
-- networking/
-- security/
-- monitoring/
-- backend/
-- docs/
+- Cost Management
+- Disaster Recovery
 

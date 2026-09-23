@@ -1,14 +1,12 @@
 # Kubernetes Production Lab
 
-Production-oriented Kubernetes engineering laboratory.
-
-## Scope
+## 核心范围
 
 - kubeadm
 - containerd
 - CNI
 - Scheduling
-- Services
+- Service
 - Ingress
 - Storage
 - RBAC
@@ -16,19 +14,20 @@ Production-oriented Kubernetes engineering laboratory.
 - Secrets
 - Prometheus
 - Grafana
-- Backup / Restore
+- Backup
+- Restore
 
-## Troubleshooting Cases
+## 故障排查
 
 - CrashLoopBackOff
 - ImagePullBackOff
 - Node NotReady
-- DNS failure
-- CNI failure
-- Service unreachable
+- DNS Failure
+- CNI Failure
+- Service Unreachable
 - PVC Pending
 - OOMKilled
-- CPU throttling
-- Kubelet failure
-- Control Plane failure
+- CPU Throttling
+- Kubelet Failure
+- Control Plane Failure
 

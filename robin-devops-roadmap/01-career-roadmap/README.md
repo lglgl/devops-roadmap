@@ -1,6 +1,6 @@
-# Career Roadmap
+# 职业路线
 
-## Career Direction
+## 长期路线
 
 Infrastructure Engineer
 → DevOps Engineer
@@ -8,31 +8,55 @@ Infrastructure Engineer
 → DevSecOps
 → Cloud / AI Infrastructure Security
 
-## Target Market
+## Phase 1：DevOps
 
-Primary target: Singapore
+- Linux
+- Docker
+- Jenkins
+- GitLab CI
+- Ansible
+- Kubernetes
+- Prometheus
+- Grafana
 
-Indicative target compensation:
+## Phase 2：Cloud Engineer
 
-- DevOps Engineer: SGD 6K–9K
-- Cloud Engineer: SGD 6.5K–10K
-- Long-term specialization: DevSecOps / Cloud Security / AI Infrastructure Security
+- AWS
+- Azure
+- Terraform
+- IAM
+- VPC
+- CloudWatch
+- Landing Zone
 
-## Strategy
+## Phase 3：DevSecOps
 
-Build demonstrable engineering capability instead of collecting isolated technologies.
+- SAST
+- SCA
+- Secret Scanning
+- IaC Security
+- Container Security
+- Kubernetes Security
+- Supply Chain Security
 
-Core progression:
+## Phase 4：AI Infrastructure
 
-1. Infrastructure
-2. Automation
-3. CI/CD
-4. Containers
-5. Kubernetes
-6. Cloud
-7. Infrastructure as Code
-8. Security
-9. Observability
-10. AI Infrastructure
-11. AI Infrastructure Security
+- GPU
+- CUDA
+- NVIDIA Container Toolkit
+- Kubernetes GPU
+- vLLM
+- LLM Serving
+- GPU Monitoring
+
+## Phase 5：AI Infrastructure Security
+
+- AI Workload Security
+- Cloud Security
+- Kubernetes Security
+- Runtime Security
+- Supply Chain Security
+- IAM
+- Data Security
+- Model Security
 

@@ -1,8 +1,6 @@
 # Observability Platform
 
-Full-stack observability architecture.
-
-## Architecture
+## 架构
 
 Application
 → Metrics / Logs / Traces
@@ -10,22 +8,20 @@ Application
 → Grafana
 → Alertmanager
 
-## Observability Models
-
-### Golden Signals
+## Golden Signals
 
 - Latency
 - Traffic
 - Errors
 - Saturation
 
-### RED
+## RED
 
 - Rate
 - Errors
 - Duration
 
-## Technologies
+## 技术栈
 
 - Prometheus
 - Grafana

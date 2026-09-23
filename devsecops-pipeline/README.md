@@ -1,7 +1,5 @@
 # DevSecOps Pipeline
 
-Security integrated into the software delivery lifecycle.
-
 ## Pipeline
 
 Developer
@@ -15,13 +13,13 @@ Developer
 → Policy Check
 → Deploy
 
-## Security Controls
+## 安全控制
 
 - SAST
 - SCA
-- Secret scanning
-- Container vulnerability scanning
-- Terraform / IaC scanning
-- Kubernetes policy enforcement
-- Security gates
+- Secret Scanning
+- Container Vulnerability Scanning
+- Terraform / IaC Scanning
+- Kubernetes Policy
+- Security Gate
 

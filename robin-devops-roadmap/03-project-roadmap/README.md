@@ -1,50 +1,41 @@
-# Project Roadmap
+# 项目路线
 
-## Phase 1 — DevOps
+## Phase 1：Infrastructure + DevOps
 
-- Docker
-- Jenkins
-- GitLab CI
-- Ansible
+- Infrastructure Lab
+- DevOps Lab
+- Jenkins CI/CD
 - Kubernetes
 - Observability
 
-## Phase 2 — Cloud
+## Phase 2：Cloud
 
-- AWS
-- Azure
-- Terraform
+- Terraform AWS
+- AWS Landing Zone
 - IAM
 - VPC
 - CloudWatch
-- Landing Zone
 
-## Phase 3 — DevSecOps
+## Phase 3：DevSecOps
 
-- SAST
-- SCA
-- Secret scanning
-- Container scanning
-- IaC scanning
-- Kubernetes security
-- Supply-chain security
+- Security Pipeline
+- IaC Security
+- Container Security
+- Kubernetes Security
 
-## Phase 4 — AI Infrastructure
+## Phase 4：AI Infrastructure
 
-- GPU infrastructure
+- GPU
 - CUDA
-- NVIDIA Container Toolkit
-- Kubernetes GPU workloads
+- Kubernetes GPU
 - vLLM
-- LLM serving
-- GPU monitoring
+- LLM Serving
 
-## Phase 5 — AI Infrastructure Security
+## Phase 5：AI Infrastructure Security
 
-- AI workload isolation
-- Model supply-chain security
-- Runtime security
-- Identity and access control
-- Data protection
-- Cloud security
+- AI Workload Security
+- Runtime Security
+- Supply Chain Security
+- Model Security
+- Cloud Security
 

@@ -1,54 +1,92 @@
 # Robin Li — Cloud / DevOps / DevSecOps / AI Infrastructure Portfolio
 
-## Career Direction
+## 技术路线
 
-Infrastructure Engineer
-→ DevOps Engineer
-→ Cloud Engineer
+Infrastructure
+→ DevOps
+→ Cloud
 → DevSecOps
-→ Cloud / AI Infrastructure Security
+→ AI Infrastructure Security
 
-## Portfolio Repositories
+## Repository
 
-| Repository | Purpose |
+| Repository | 定位 |
 |---|---|
-| robin-devops-roadmap | Career roadmap and skill matrix |
-| devops-lab | End-to-end DevOps engineering |
-| jenkins-cicd-lab | Jenkins CI/CD |
-| kubernetes-production-lab | Production Kubernetes |
-| observability-platform | Metrics, logs, traces, alerting |
-| terraform-aws-infrastructure | AWS Infrastructure as Code |
-| aws-landing-zone | AWS governance and security |
-| devsecops-pipeline | Security-integrated CI/CD |
-| ai-infrastructure-lab | GPU and LLM infrastructure |
+| robin-devops-roadmap | 职业路线与技能矩阵 |
+| infrastructure-lab | 基础设施核心能力 |
+| devops-lab | DevOps 综合工程 |
+| jenkins-cicd-lab | CI/CD |
+| kubernetes-production-lab | Kubernetes |
+| observability-platform | 可观测性 |
+| terraform-aws-infrastructure | AWS IaC |
+| aws-landing-zone | Cloud Architecture |
+| devsecops-pipeline | DevSecOps |
+| ai-infrastructure-lab | AI Infrastructure |
 | ai-infra-security | AI Infrastructure Security |
-| technical-notes | Engineering knowledge base |
+| technical-notes | 技术知识库 |
 
-## Engineering Progression
+## 基础设施层
+
+Infrastructure Lab 是整个作品集的底层。
+
+Linux
+→ Network
+→ Database
+→ Redis
+→ Kafka
+→ RabbitMQ
+→ Nginx
+→ Docker
+→ Kubernetes
+
+## DevOps 层
 
 Infrastructure
 → Automation
 → CI/CD
-→ Containers
+→ Container
 → Kubernetes
-→ Cloud
-→ IaC
-→ Security
 → Observability
-→ AI Infrastructure
+
+## Cloud 层
+
+AWS
+→ VPC
+→ IAM
+→ Terraform
+→ CloudWatch
+→ Landing Zone
+
+## Security 层
+
+DevSecOps
+→ SAST
+→ SCA
+→ IaC Security
+→ Container Security
+→ Kubernetes Security
+
+## AI 层
+
+GPU
+→ CUDA
+→ Kubernetes GPU
+→ vLLM
+→ LLM Serving
 → AI Infrastructure Security
 
-## Portfolio Principle
+## 作品集原则
 
-Each project should demonstrate:
+每个核心项目尽量证明：
 
-- Architecture
-- Automation
-- Deployment
-- Security
-- Observability
-- Troubleshooting
-- Reliability
-- Documentation
-- Engineering trade-offs
+- 能部署
+- 能自动化
+- 能监控
+- 能排障
+- 能保障安全
+- 能进行容量规划
+- 能做备份恢复
+- 能解释架构设计
+- 能解释故障根因
+- 能说明工程取舍
 

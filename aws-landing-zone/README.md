@@ -1,14 +1,11 @@
 # AWS Landing Zone
 
-Multi-account AWS governance and security architecture.
-
-## Scope
+## 核心范围
 
 - AWS Organizations
 - Organizational Units
-- Account strategy
+- Account Strategy
 - IAM
-- Centralized logging
 - CloudTrail
 - AWS Config
 - GuardDuty
@@ -16,9 +13,10 @@ Multi-account AWS governance and security architecture.
 - Transit Gateway
 - VPC
 - DNS
-- Compliance controls
+- Centralized Logging
+- Compliance
 
-## Engineering Objective
+## 目标
 
-Build a secure and governable AWS foundation for multiple environments and workloads.
+建立安全、可治理、可扩展的 AWS 多账户基础设施。
 

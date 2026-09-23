@@ -1,50 +1,22 @@
 # robin-devops-roadmap
 
-Career roadmap and engineering skill matrix for the transition from Infrastructure Engineer to DevOps Engineer, Cloud Engineer, DevSecOps, and ultimately Cloud / AI Infrastructure Security.
+记录从 Infrastructure Engineer → DevOps Engineer → Cloud Engineer → DevSecOps → AI Infrastructure Security 的技术成长路线。
 
-## Status
+## 项目定位
 
-Planning / In Progress
+本仓库属于 Robin Li Cloud / DevOps / DevSecOps / AI Infrastructure 技术作品集。
 
-## Repository Structure
+## 工程实践
 
-This repository is part of my Cloud / DevOps / DevSecOps / AI Infrastructure engineering portfolio.
+每个项目尽量包含：
 
-## Engineering Focus
-
-- Linux
-- Networking
-- Automation
-- Cloud Infrastructure
-- Containers
-- Kubernetes
-- CI/CD
-- Security
-- Observability
-- Infrastructure as Code
-- AI Infrastructure
-
-## Architecture
-
-Architecture documentation will be added during implementation.
-
-## Deployment
-
-Deployment instructions will be added with the implementation.
-
-## Security
-
-Security controls and security considerations will be documented here.
-
-## Observability
-
-Metrics, logs, traces, alerts, and dashboards will be documented here.
-
-## Troubleshooting
-
-Production-style troubleshooting cases will be documented here.
-
-## Lessons Learned
-
-Engineering decisions, trade-offs, failures, and improvements will be documented here.
+1. Architecture
+2. Deployment
+3. Automation
+4. Security
+5. Monitoring
+6. Troubleshooting
+7. Disaster Recovery
+8. Performance
+9. Lessons Learned
 

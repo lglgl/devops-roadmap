@@ -1,7 +1,5 @@
 # AI Infrastructure Lab
 
-AI infrastructure engineering laboratory.
-
 ## Architecture
 
 GPU
@@ -12,7 +10,7 @@ GPU
 → Observability
 → Security
 
-## Technologies
+## 技术栈
 
 - NVIDIA GPU
 - CUDA
@@ -24,15 +22,15 @@ GPU
 - Prometheus
 - Grafana
 
-## Engineering Topics
+## 核心能力
 
-- GPU resource management
-- GPU monitoring
-- Model serving
-- Inference performance
+- GPU Resource Management
+- GPU Monitoring
+- Model Serving
+- Inference Performance
 - Throughput
 - Latency
-- Workload isolation
-- Container security
-- Access control
+- Workload Isolation
+- Container Security
+- Access Control
 

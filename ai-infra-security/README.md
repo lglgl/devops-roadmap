@@ -1,10 +1,15 @@
 # AI Infrastructure Security
 
-Long-term specialization project combining AI Infrastructure and Security.
+## 专业方向
+
+Cloud Security
+→ DevSecOps
+→ AI Infrastructure
+→ AI Infrastructure Security
 
 ## Security Architecture
 
-AI Workloads
+AI Workload
 → Kubernetes / Containers
 → Cloud Infrastructure
 → Identity
@@ -28,11 +33,4 @@ AI Workloads
 - Model Integrity
 - Model Access Control
 - AI Workload Isolation
-
-## Long-Term Direction
-
-Cloud Security
-→ DevSecOps
-→ AI Infrastructure
-→ AI Infrastructure Security
 
