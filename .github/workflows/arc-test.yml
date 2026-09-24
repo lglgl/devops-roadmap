@@ -1,0 +1,60 @@
+name: ARC Runner Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: arc-runner-set
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Runner Information
+        run: |
+          echo "======================================"
+          echo "GitHub Actions ARC Runner"
+          echo "======================================"
+
+          echo "Hostname:"
+          hostname
+
+          echo ""
+          echo "OS:"
+          uname -a
+
+          echo ""
+          echo "Working Directory:"
+          pwd
+
+      - name: Repository Information
+        run: |
+          echo "======================================"
+          echo "Repository"
+          echo "======================================"
+
+          git status
+
+          echo ""
+          echo "Latest Commit:"
+          git log -1 --oneline
+
+      - name: Kubernetes Environment
+        run: |
+          echo "======================================"
+          echo "Runner Environment"
+          echo "======================================"
+
+          echo "Runner:"
+          echo "${RUNNER_NAME}"
+
+          echo ""
+          echo "Architecture:"
+          uname -m
+
+      - name: Finish
+        run: |
+          echo "======================================"
+          echo "ARC Runner Test Successful"
+          echo "======================================"
