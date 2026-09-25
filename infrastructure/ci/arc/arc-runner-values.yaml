@@ -1,0 +1,47 @@
+# ============================================================
+# GitHub Actions ARC Runner Scale Set
+# ============================================================
+
+# GitHub Repository
+githubConfigUrl: "https://github.com/lglgl/devops-roadmap"
+
+# GitHub App Authentication
+# 使用已经创建好的 Kubernetes Secret
+githubConfigSecret: "arc-github-app"
+
+
+# ============================================================
+# Docker-in-Docker
+# ============================================================
+#
+# 每个 Ephemeral Runner Pod 都会拥有：
+#
+#   Runner Container
+#          │
+#          │ Docker Socket
+#          ▼
+#   Docker-in-Docker
+#
+# Workflow 中即可直接执行：
+#
+#   docker build
+#   docker images
+#   docker run
+#   docker push
+#
+# ============================================================
+
+containerMode:
+  type: "dind"
+
+
+# ============================================================
+# Runner 数量
+# ============================================================
+
+# 不保持空闲 Runner
+# 有 GitHub Actions Job 时才创建 Runner
+minRunners: 0
+
+# 最大同时运行 Runner 数量
+maxRunners: 2

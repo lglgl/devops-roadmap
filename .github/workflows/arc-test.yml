@@ -1,60 +1,102 @@
-name: ARC Runner Test
+name: ARC Docker Build Test
 
 on:
   workflow_dispatch:
 
 jobs:
-  test:
+
+  docker-test:
     runs-on: arc-runner-set
 
     steps:
-      - name: Checkout
+
+      # ======================================================
+      # 1. Checkout
+      # ======================================================
+
+      - name: Checkout Repository
         uses: actions/checkout@v4
+
+
+      # ======================================================
+      # 2. Runner Information
+      # ======================================================
 
       - name: Runner Information
         run: |
           echo "======================================"
-          echo "GitHub Actions ARC Runner"
+          echo "ARC Runner"
           echo "======================================"
+
+          echo "Runner Name:"
+          echo "${RUNNER_NAME}"
+
+          echo ""
 
           echo "Hostname:"
           hostname
 
           echo ""
-          echo "OS:"
-          uname -a
 
-          echo ""
-          echo "Working Directory:"
-          pwd
-
-      - name: Repository Information
-        run: |
-          echo "======================================"
-          echo "Repository"
-          echo "======================================"
-
-          git status
-
-          echo ""
-          echo "Latest Commit:"
-          git log -1 --oneline
-
-      - name: Kubernetes Environment
-        run: |
-          echo "======================================"
-          echo "Runner Environment"
-          echo "======================================"
-
-          echo "Runner:"
-          echo "${RUNNER_NAME}"
-
-          echo ""
           echo "Architecture:"
           uname -m
+
+
+      # ======================================================
+      # 3. Docker Information
+      # ======================================================
+
+      - name: Docker Information
+        run: |
+          echo "======================================"
+          echo "Docker"
+          echo "======================================"
+
+          docker version
+
+          echo ""
+
+          docker info
+
+
+      # ======================================================
+      # 4. Build Test Image
+      # ======================================================
+
+      - name: Build Docker Image
+        run: |
+          echo "======================================"
+          echo "Docker Build"
+          echo "======================================"
+
+          docker build \
+            -t devops-roadmap:test \
+            .
+
+
+      # ======================================================
+      # 5. Check Image
+      # ======================================================
+
+      - name: Check Docker Image
+        run: |
+          echo "======================================"
+          echo "Docker Images"
+          echo "======================================"
+
+          docker images
+
+          echo ""
+
+          docker image inspect devops-roadmap:test
+
+
+      # ======================================================
+      # 6. Finish
+      # ======================================================
 
       - name: Finish
         run: |
           echo "======================================"
-          echo "ARC Runner Test Successful"
+          echo "Docker Build Successful"
           echo "======================================"
